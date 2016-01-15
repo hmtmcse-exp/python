@@ -16,6 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from crud import views
+
 urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^item/(?P<id>\d+)/', views.item_detail, name='item_detail'),
     url(r'^admin/', admin.site.urls),
 ]
