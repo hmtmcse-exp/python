@@ -6,7 +6,12 @@ from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+
+    search = request.GET.get('search','')
+    if search != '':
+        posts = Post.objects.filter(published_date__lte=timezone.now()).filter(title__contains=search).order_by('published_date')
+    else :
+        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     popularPost = Post.objects.filter(published_date__lte=timezone.now()).filter(total_visited__gt = 0).order_by("-total_visited")[:5]
     return render(request, 'blog/post_list.html', {'posts': posts,'popularPost':popularPost })
 
