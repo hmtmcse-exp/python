@@ -1,5 +1,4 @@
-from moduletest import Piano
+from bin import Calculator
 
-piano = Piano()
-
-print(piano.printdetails())
+calculator = Calculator
+print(calculator.add())
