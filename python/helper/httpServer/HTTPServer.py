@@ -32,7 +32,6 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
 
             if content_type == "application/json":
                 print(post_string)
-                json_input = '{ "one": 1, "two": { "list": [ {"item":"A"},{"item":"B"} ] } }'
                 json_dict = json.loads(post_string)
                 print(json_dict["one"])
 
