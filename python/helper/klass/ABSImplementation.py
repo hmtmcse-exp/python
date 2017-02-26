@@ -1,4 +1,5 @@
 from klass.AbstructKlass import AbstructKlass
+from klass.AbstructKlassPassing import AbstructKlassPassing
 
 
 class ABSImplementation(AbstructKlass):
@@ -14,4 +15,6 @@ class ABSImplementation(AbstructKlass):
 if __name__ == "__main__":
 
     abslementation = ABSImplementation()
-    abslementation.test()
+    # abslementation.test()
+    abs = AbstructKlassPassing()
+    abs.testABS(abslementation)
