@@ -26,3 +26,11 @@ print("Phone Num : ", num)
 num = re.sub(r'\D', "", phone)
 print("Phone Num : ", num)
 
+
+
+line = "origin/HEAD -> origin/master"
+matchObj = re.match(r'origin/HEAD\s+->\s+.*', line, re.M | re.I)
+if matchObj:
+   print("Touhid")
+   print(matchObj.group())
+   print(re.sub(r'origin/HEAD\s+->\s+origin/', '', line))
