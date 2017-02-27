@@ -3,5 +3,5 @@
 
 class AbstructKlassPassing:
 
-    def testABS(self,ABSABSImplementation):
-        ABSABSImplementation.callBack()
+    def testABS(self, AbstructKlass):
+        AbstructKlass.callBack()
