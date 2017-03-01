@@ -1,3 +1,5 @@
+import zipfile
+
 import os
 import shutil
 
@@ -17,7 +19,15 @@ class FileHandler:
         destination = os.path.join(destination, fileName)
         shutil.make_archive(destination, format, source)
 
+    def extract_zip(self, zip_file, extract_location):
+        fh = open(zip_file, 'rb')
+        z = zipfile.ZipFile(fh)
+        for name in z.namelist():
+            z.extract(name, extract_location)
+        fh.close()
+
 
 if __name__ == "__main__":
     fileHandler = FileHandler()
-    fileHandler.archive("vai", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML", "C:\\Users\\touhid\Desktop")
+    # fileHandler.archive("vai", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML", "C:\\Users\\touhid\Desktop")
+    fileHandler.extract_zip("C:\\Users\\touhid\Desktop\\pythontest.zip", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML\\X")
