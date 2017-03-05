@@ -1,3 +1,4 @@
+import json
 import zipfile
 
 import os
@@ -26,8 +27,20 @@ class FileHandler:
             z.extract(name, extract_location)
         fh.close()
 
+    def write_to_file(self, location):
+        dictionary = dict()
+        dictionary["last_log"] = "last_log_mia"
+        dictionary["branch"] = "branch"
+        dictionary["last_commit"] = "last_commit"
+        json_string = json.dumps(dictionary)
+        open_file = open(location, "w")
+        open_file.write(json_string)
+
 
 if __name__ == "__main__":
     fileHandler = FileHandler()
+    # fileHandler.write_to_file("C:\\Users\\touhid\\Desktop\\table\\test\\Materia\\ANGULAR\dist\\fonts\\ionicons\\css\\*")
+    fileHandler.write_to_file("C:\\Users\\touhid\\Desktop\\data.txt")
+
     # fileHandler.archive("vai", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML", "C:\\Users\\touhid\Desktop")
-    fileHandler.extract_zip("C:\\Users\\touhid\Desktop\\pythontest.zip", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML\\X")
+    # fileHandler.extract_zip("C:\\Users\\touhid\Desktop\\pythontest.zip", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML\\X")
