@@ -51,3 +51,6 @@ main_loop = urwid.MainLoop(layout, palette, unhandled_input=handle_input)
 
 # Kick off the program
 main_loop.run()
+
+
+# http://guru.net.nz/blog/python/ncurses/video/2015/01/21/use-curses-dont-swear.html
