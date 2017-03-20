@@ -1,7 +1,7 @@
 import urwid
 
 palette = [('I say', 'default,bold', 'default', 'bold'),]
-ask = urwid.Edit(('I say', u"What is your name?\n"))
+ask = urwid.Edit(('I say', u"What is your name? :"))
 reply = urwid.Text(u"")
 button = urwid.Button(u'Exit')
 div = urwid.Divider()
