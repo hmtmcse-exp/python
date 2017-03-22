@@ -1,6 +1,8 @@
 import json
 import zipfile
 
+from datetime import date, datetime
+
 import os
 import shutil
 
@@ -36,11 +38,21 @@ class FileHandler:
         open_file = open(location, "w")
         open_file.write(json_string)
 
+    def get_dir_list(self, path):
+        return os.listdir(path)
 
 if __name__ == "__main__":
+
+    read_file = open("build_log", "r")
+    data = read_file.read()
+    d = json.loads(data)
+    print(d["last_log"])
+
+    print(str(datetime.now()))
+
     fileHandler = FileHandler()
     # fileHandler.write_to_file("C:\\Users\\touhid\\Desktop\\table\\test\\Materia\\ANGULAR\dist\\fonts\\ionicons\\css\\*")
-    fileHandler.write_to_file("C:\\Users\\touhid\\Desktop\\data.txt")
+    print(fileHandler.get_dir_list("C:\\Users\\touhid\\Desktop\\"))
 
     # fileHandler.archive("vai", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML", "C:\\Users\\touhid\Desktop")
     # fileHandler.extract_zip("C:\\Users\\touhid\Desktop\\pythontest.zip", "C:\\Users\\touhid\Desktop\\table\\test\\Materia\\HTML\\X")
