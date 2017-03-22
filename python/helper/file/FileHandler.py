@@ -43,12 +43,15 @@ class FileHandler:
 
 if __name__ == "__main__":
 
-    read_file = open("build_log", "r")
+    read_file = open("C:\\Users\\touhid\\Desktop\\jimsenergy.sql", "r", encoding='utf-8', errors='ignore')
     data = read_file.read()
-    d = json.loads(data)
-    print(d["last_log"])
+    print(data)
 
-    print(str(datetime.now()))
+
+    # d = json.loads(data)
+    # print(d["last_log"])
+
+    # print(str(datetime.now()))
 
     fileHandler = FileHandler()
     # fileHandler.write_to_file("C:\\Users\\touhid\\Desktop\\table\\test\\Materia\\ANGULAR\dist\\fonts\\ionicons\\css\\*")
