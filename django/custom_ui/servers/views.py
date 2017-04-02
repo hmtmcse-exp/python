@@ -40,3 +40,7 @@ def server_delete(request, pk, template_name='servers/server_confirm_delete.html
         server.delete()
         return redirect('server_list')
     return render(request, template_name, {'object':server})
+
+
+def touhid_mia(request, template_name='servers/touhid.html'):
+    return render(request, template_name)

@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^new$', views.server_create, name='server_new'),
     url(r'^edit/(?P<pk>\d+)$', views.server_update, name='server_edit'),
     url(r'^delete/(?P<pk>\d+)$', views.server_delete, name='server_delete'),
+    url(r'^touhid/', views.touhid_mia, name='touhid_mia'),
 ]
