@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 
@@ -43,4 +44,14 @@ def server_delete(request, pk, template_name='servers/server_confirm_delete.html
 
 
 def touhid_mia(request, template_name='servers/touhid.html'):
+    return render(request, template_name)
+
+
+def message(request, template_name='servers/message.html'):
+    messages.error(request, "Huge success!")
+    messages.success(request, "Huge success!")
+    return render(request, template_name)
+
+
+def message2(request, template_name='servers/message2.html'):
     return render(request, template_name)
