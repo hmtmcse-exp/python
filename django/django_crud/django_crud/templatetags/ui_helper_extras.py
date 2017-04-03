@@ -1,3 +1,5 @@
+import datetime
+
 from django import template
 from django.utils.html import format_html
 
@@ -24,4 +26,3 @@ def load_js(file_name):
 def image_url(file_name):
     url = concat_static_url("images/" + file_name)
     return url
-
