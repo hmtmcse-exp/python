@@ -6,7 +6,7 @@ def index(request):
 
 
 def create(request):
-    return render(request, 'university/home.html')
+    return render(request, 'university/form.html')
 
 
 def update(request):
