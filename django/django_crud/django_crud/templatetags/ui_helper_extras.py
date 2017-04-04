@@ -50,3 +50,9 @@ def item_per_page(context):
             html += '<option>' + str(item) + '</option>'
     html += '</select>'
     return format_html(html)
+
+
+@register.simple_tag(takes_context=True)
+def sortable_th(context, name):
+    html = '<th><span class="glyphicon glyphicon-triangle-bottom"></span>  ' + name + '  <span class="glyphicon glyphicon-triangle-top"></span></th>'
+    return format_html(html)
