@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django.shortcuts import render, redirect
 
+from django_crud.parent.ModelSaver import ModelSaver
 from university.models import Department
 from university.services.DepartmentService import DepartmentService
 
@@ -8,7 +9,7 @@ from university.services.DepartmentService import DepartmentService
 class DepartmentForm(ModelForm):
     class Meta:
         model = Department
-        fields = ['name', 'description']
+        fields = ['name']
 
 
 def index(request):
@@ -17,13 +18,32 @@ def index(request):
 
 
 def create(request):
-    return render(request, 'university/department/form.html')
+    return render(request, 'university/department/form.html', {'data':{}})
 
 
 def save(request):
     form = DepartmentForm(request.POST or None)
     if form.is_valid():
-        form.save()
+
+        # for key in request.POST:
+        #     print(key)
+        #     value = request.POST[key]
+        #     print(value)
+
+        data = ModelSaver(Department, request.POST)
+
+        if data.is_valid():
+            data.save()
+
+        # department = Department()
+        # setattr(department, "description", "Added")
+        # setattr(department, "name", "name")
+        #
+        # response = department.save()
+        # if response is None:
+        #     print("Not saved")
+        # else:
+        #     print("Saved")
         return redirect('department_index')
     else:
         return redirect('department_index')

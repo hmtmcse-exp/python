@@ -10,6 +10,17 @@ class Department(models.Model):
     created = models.DateTimeField(auto_now=True)
     enable = models.BooleanField(default=True)
 
+    @staticmethod
+    def get_all_fields():
+        return {
+            'name': {
+                'required': True,
+                'message': 'Please Enter Name'
+            },
+            'description': {},
+            'enable': {},
+        }
+
 
 class Course(models.Model):
     name = models.CharField(max_length=200)

@@ -8,3 +8,7 @@ class DepartmentService:
         return Department.objects.all().filter(
             enable=True
         )
+
+    @classmethod
+    def save_form(cls, data):
+        department = Department()
