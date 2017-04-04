@@ -26,5 +26,5 @@ class ModelSaver:
     def save(self):
         self.modelObject.save()
 
-    def get_message(self):
+    def get_error_message(self):
         return self.error_message
