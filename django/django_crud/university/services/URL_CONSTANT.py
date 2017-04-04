@@ -7,5 +7,6 @@ HOME_INDEX = ""
 
 DEPARTMENT_INDEX = "department/"
 DEPARTMENT_CREATE = "department/create/"
+DEPARTMENT_SAVE = "department/save/"
 DEPARTMENT_UPDATE = "department/update/"
 DEPARTMENT_DELETE = "department/delete/"

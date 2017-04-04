@@ -1,13 +1,32 @@
+from django.forms import ModelForm
+from django.shortcuts import render, redirect
 
-from django.shortcuts import render
+from university.models import Department
+from university.services.DepartmentService import DepartmentService
+
+
+class DepartmentForm(ModelForm):
+    class Meta:
+        model = Department
+        fields = ['name', 'description']
 
 
 def index(request):
-    return render(request, 'university/home.html')
+    departments = DepartmentService.get_all()
+    return render(request, 'university/department/index.html', {'departments': departments})
 
 
 def create(request):
-    return render(request, 'university/form.html')
+    return render(request, 'university/department/form.html')
+
+
+def save(request):
+    form = DepartmentForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('course_index')
+    else:
+        return redirect('course_index')
 
 
 def update(request):

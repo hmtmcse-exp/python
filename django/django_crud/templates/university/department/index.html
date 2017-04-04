@@ -3,7 +3,7 @@
 <div class="row">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            Student List
+            Department List
         </div>
         <div class="panel-body">
             <div class="navbar-form navbar-right">
@@ -51,8 +51,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="text-center">
-                    <td>A</td>
+                {% for department in departments %}
+                <tr >
+                    <td>{{ department.name }}</td>
                     <td>B</td>
                     <td class="action-row">
                         <div class="btn-toolbar">
@@ -64,6 +65,7 @@
                         </div>
                     </td>
                 </tr>
+                {% endfor %}
                 </tbody>
             </table>
             <div class="paginate">
