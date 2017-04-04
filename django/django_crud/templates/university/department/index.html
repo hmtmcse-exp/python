@@ -71,12 +71,7 @@
             </table>
             <div class="paginate-panel">
                 <div class="pull-left">
-                    <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
+                    {% item_per_page %}
                 </div>
                 <div class="pull-right">
                     {% make_pagination 10 %}

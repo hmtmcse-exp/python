@@ -3,6 +3,8 @@ import datetime
 from django import template
 from django.utils.html import format_html
 
+from django_crud.helper import SYSTEM_CONSTANT
+
 register = template.Library()
 
 
@@ -35,3 +37,16 @@ def image_url(file_name):
 def make_pagination(context, toatal):
     request = context['request']
     return format_html(generate_pagination())
+
+
+@register.simple_tag(takes_context=True)
+def item_per_page(context):
+    html = '<select class="form-control">'
+    selected = SYSTEM_CONSTANT.ITEMS_PER_PAGE
+    for item in [5, 10, 15, 25, 50, 100, 500]:
+        if item == selected:
+            html += '<option selected>' + str(item) + '</option>'
+        else:
+            html += '<option>' + str(item) + '</option>'
+    html += '</select>'
+    return format_html(html)
