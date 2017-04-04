@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.forms import ModelForm
 from django.shortcuts import render, redirect
 
@@ -25,8 +26,10 @@ def save(request):
     data = ModelSaver(Department, request.POST)
     if data.is_valid():
         data.save()
+        messages.success(request, "Successfully Created.")
         return redirect('department_index')
     else:
+        messages.error(request, data.get_error_message())
         return redirect('department_index')
 
 

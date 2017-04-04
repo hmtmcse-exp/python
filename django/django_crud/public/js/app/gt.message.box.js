@@ -12,19 +12,21 @@ GT.messageBox =  (function () {
     }
 
     return {
+        showMessageByString:function (status, message) {
+            if (status === "success"){
+               GT.messageBox.showMessage(true, message)
+            }else{
+              GT.messageBox.showMessage(false, message)
+            }
+        },
         showMessage: function(success, message) {
-
-
-            console.log("------------------ success -------------------------" + success);
             if(!jQuery(".alert").length) {
                 jQuery(document.body).append(messageHtml);
             }
             var messageType = "alert-success"
             if(success !== true){
                 messageType = "alert-danger"
-                console.log("-------------------------------------------")
             }
-
             checkTimeOut();
             var messageElement = $(document.body).find(".alert");
             messageElement.find(".message").text(message);

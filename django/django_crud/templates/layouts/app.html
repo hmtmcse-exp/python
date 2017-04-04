@@ -17,6 +17,15 @@
         {% load_js 'app/gt.js' %}
         {% load_js 'app/gt.init.js' %}
         {% load_js 'app/gt.message.box.js' %}
+        <script type="text/javascript">
+            GT.baseURL = "/";
+            {% for message in messages %}
+                jQuery(document).ready(function () {
+                    GT.messageBox.showMessageByString("{{ message.tags }}", "{{ message }}");
+                });
+            {% endfor %}
+        </script>
+
     </head>
 
 </header>

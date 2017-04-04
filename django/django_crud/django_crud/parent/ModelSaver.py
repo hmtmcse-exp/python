@@ -28,3 +28,6 @@ class ModelSaver:
 
     def get_error_message(self):
         return self.error_message
+
+    def get_model(self):
+        return self.modelObject
