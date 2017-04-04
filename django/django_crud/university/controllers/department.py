@@ -16,3 +16,4 @@ def update(request):
 
 def delete(request):
     return render(request, 'university/home.html')
+
