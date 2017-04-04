@@ -24,9 +24,9 @@ def save(request):
     form = DepartmentForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect('course_index')
+        return redirect('department_index')
     else:
-        return redirect('course_index')
+        return redirect('department_index')
 
 
 def update(request):
