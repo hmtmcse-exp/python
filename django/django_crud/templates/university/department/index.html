@@ -1,5 +1,6 @@
 {% extends 'layouts/app.html' %}
 {% block content %}
+{% load ui_helper_extras %}
 <div class="row">
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -68,8 +69,18 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <div class="paginate">
-
+            <div class="paginate-panel">
+                <div class="pull-left">
+                    <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+                <div class="pull-right">
+                    {% make_pagination 10 %}
+                </div>
             </div>
         </div>
     </div>
