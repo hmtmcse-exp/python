@@ -15,7 +15,7 @@ class Department(models.Model):
         return {
             'name': {
                 'required': True,
-                'message': 'Please Enter Name'
+                'message': 'Please Enter Name.'
             },
             'description': {},
             'enable': {},
