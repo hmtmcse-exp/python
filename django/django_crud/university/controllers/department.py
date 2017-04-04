@@ -1,16 +1,9 @@
 from django.contrib import messages
-from django.forms import ModelForm
 from django.shortcuts import render, redirect
-
-from django_crud.parent.ModelSaver import ModelSaver
+from django_crud.helper.ModelSaver import ModelSaver
+from django_crud.helper.TmpMemory import TmpMemory
 from university.models import Department
 from university.services.DepartmentService import DepartmentService
-
-
-class DepartmentForm(ModelForm):
-    class Meta:
-        model = Department
-        fields = ['name']
 
 
 def index(request):
@@ -19,7 +12,7 @@ def index(request):
 
 
 def create(request):
-    return render(request, 'university/department/form.html', {'data':{}})
+    return render(request, 'university/department/create.html', {'data': TmpMemory.get_redirect_tmp()})
 
 
 def save(request):
@@ -30,7 +23,8 @@ def save(request):
         return redirect('department_index')
     else:
         messages.error(request, data.get_error_message())
-        return redirect('department_index')
+        TmpMemory.set_redirect_tmp(request.POST)
+        return redirect('department_create')
 
 
 def update(request):
