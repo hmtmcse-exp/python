@@ -21,8 +21,6 @@ class ModelSaver:
                         return False
             if form_field is not None and form_field != "":
                 setattr(self.modelObject, key, form_field)
-                print("form_field = " + str(form_field))
-                print("key = " + str(key))
         return True
 
     def save(self):
