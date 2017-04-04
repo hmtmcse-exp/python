@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django_crud.helper.ModelSaver import ModelSaver
+from django_crud.helper.CRUDHelper import CRUDHelper
 from django_crud.helper.TmpMemory import TmpMemory
 from university.models import Department
 from university.services.DepartmentService import DepartmentService
@@ -16,7 +16,7 @@ def create(request):
 
 
 def save(request):
-    data = ModelSaver(Department, request.POST)
+    data = CRUDHelper(Department, request.POST)
     if data.is_valid():
         data.save()
         messages.success(request, "Successfully Created.")

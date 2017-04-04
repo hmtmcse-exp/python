@@ -1,5 +1,5 @@
 
-class ModelSaver:
+class CRUDHelper:
 
     def __init__(self, model, data):
         self.model = model
@@ -31,3 +31,9 @@ class ModelSaver:
 
     def get_model(self):
         return self.modelObject
+
+    def get_list(self):
+        pass
+
+    def get_total(self):
+        pass
