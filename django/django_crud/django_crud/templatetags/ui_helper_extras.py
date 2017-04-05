@@ -2,7 +2,6 @@ import datetime
 
 from django import template
 from django.utils.html import format_html
-
 from django_crud.helper import SYSTEM_CONSTANT
 
 register = template.Library()
@@ -87,6 +86,19 @@ def item_per_page(context):
 
 
 @register.simple_tag(takes_context=True)
-def sortable_th(context, name):
-    html = '<th><span class="glyphicon glyphicon-triangle-bottom"></span>  ' + name + '  <span class="glyphicon glyphicon-triangle-top"></span></th>'
+def sortable_th(context, display_name, name):
+    request = context['request']
+    get_data = request.GET
+    sort_col = get_data.get("sort")
+    current_sort = name
+    icon = ""
+    if sort_col is not None and (sort_col == name or sort_col == "-" + name):
+        if sort_col.startswith("-"):
+            current_sort = name
+            icon = '<span class="glyphicon glyphicon-triangle-bottom"></span>'
+        else:
+            current_sort = "-" + name
+            icon = '<span class="glyphicon glyphicon-triangle-top"></span>'
+
+    html = '<th>' + icon + ' <a href="?sort=' + current_sort + '">' + display_name + '</a></th>'
     return format_html(html)
