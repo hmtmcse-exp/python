@@ -1,16 +1,19 @@
+from django_crud.helper import SYSTEM_CONSTANT
+
 
 class CRUDHelper:
 
     def __init__(self, model, data):
         self.model = model
         self.modelObject = model()
-        self.data = data
+        self.request = data
         self.error_message = "Unknown Error."
+        self.total = 0
 
     def is_valid(self):
         for key in self.model.get_all_fields():
             value = self.model.get_all_fields()[key]
-            form_field = self.data.get(key)
+            form_field = self.request.get(key)
             if bool(value):
                 if "required" in value:
                     if form_field is None or form_field == "":
@@ -33,7 +36,31 @@ class CRUDHelper:
         return self.modelObject
 
     def get_list(self):
-        pass
+        query = self.model.objects.filter(
+            enable=True
+        )
+        self.total = query.count()
+        if self.request.get('colName') is not None and self.request.get('colValue') is not None:
+            criteria = self.request.get('colName') + '__contains'
+            query = query.filter(**{criteria: self.request.get('colValue')})
+
+        if self.request.get('sort') is None:
+            query = query.order_by("-id")
+        else:
+            query = query.order_by(self.request.get('sort'))
+
+        offset = 0
+        if self.request.get('offset') is not None:
+            offset = int(self.request.get('offset'))
+
+        limit = SYSTEM_CONSTANT.ITEMS_PER_PAGE
+        if self.request.get('limit') is not None:
+            limit = int(self.request.get('limit'))
+
+        limit = limit + offset
+        query = query.all()[offset:limit]
+
+        return query
 
     def get_total(self):
-        pass
+        return self.total

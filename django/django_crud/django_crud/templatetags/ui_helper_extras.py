@@ -13,21 +13,20 @@ def concat_static_url(url):
 
 
 def number_between(n, start, end):
-    if start <= n <= end:
+    if start < n <= end:
         return True
     else:
         return False
 
 
-def generate_pagination(total):
-    loop = int(total / SYSTEM_CONSTANT.ITEMS_PER_PAGE)
-    modulus = total % SYSTEM_CONSTANT.ITEMS_PER_PAGE
+def generate_pagination(total, current_offset, limit):
+    loop = int(total / limit)
+    modulus = total % limit
     html = '<ul class="pagination">'
-    offset = 0
-    limit = SYSTEM_CONSTANT.ITEMS_PER_PAGE
     n = 0
+    offset = 0
     for n in range(1, loop + 1):
-        if number_between(n, offset, limit):
+        if number_between(n * limit, current_offset, current_offset + limit):
             html += '<li class="active"><a href="#">' + str(n) + '</a></li>'
         else:
             html += '<li><a href="?offset=' + str(offset) + '&limit=' + str(limit) + '">' + str(n) + '</a></li>'
@@ -35,7 +34,7 @@ def generate_pagination(total):
 
     if modulus != 0:
         n += 1
-        if number_between(n, offset, limit):
+        if number_between(n * limit, current_offset, current_offset + limit):
             html += '<li class="active"><a href="#">' + str(n) + '</a></li>'
         else:
             html += '<li><a href="?offset=' + str(offset) + '&limit=' + str(limit) + '">' + str(n) + '</a></li>'
@@ -61,9 +60,17 @@ def image_url(file_name):
 
 
 @register.simple_tag(takes_context=True)
-def make_pagination(context, toatal):
+def make_pagination(context, total):
     request = context['request']
-    return format_html(generate_pagination(toatal))
+    get_data = request.GET
+    offset = 0
+    if get_data.get('offset') is not None:
+        offset = int(get_data.get('offset'))
+
+    limit = SYSTEM_CONSTANT.ITEMS_PER_PAGE
+    if get_data.get('limit') is not None:
+        limit = int(get_data.get('limit'))
+    return format_html(generate_pagination(total, offset, limit))
 
 
 @register.simple_tag(takes_context=True)

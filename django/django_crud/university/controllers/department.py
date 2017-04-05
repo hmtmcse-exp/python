@@ -3,12 +3,13 @@ from django.shortcuts import render, redirect
 from django_crud.helper.CRUDHelper import CRUDHelper
 from django_crud.helper.TmpMemory import TmpMemory
 from university.models import Department
-from university.services.DepartmentService import DepartmentService
 
 
 def index(request):
-    departments = DepartmentService.get_all()
-    return render(request, 'university/department/index.html', {'departments': departments})
+    crud_helper = CRUDHelper(Department, request.GET)
+    departments = crud_helper.get_list()
+    total_count = crud_helper.get_total()
+    return render(request, 'university/department/index.html', {'departments': departments, 'total_count': total_count})
 
 
 def create(request):
