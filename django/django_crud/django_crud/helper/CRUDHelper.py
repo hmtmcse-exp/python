@@ -40,9 +40,11 @@ class CRUDHelper:
             enable=True
         )
         self.total = query.count()
-        if self.request.get('colName') is not None and self.request.get('colValue') is not None:
-            criteria = self.request.get('colName') + '__contains'
-            query = query.filter(**{criteria: self.request.get('colValue')})
+        col_name = self.request.get('colName')
+        if col_name is not None and self.request.get('colValue') is not None:
+            if col_name != "" and col_name != "#":
+                criteria = self.request.get('colName') + '__contains'
+                query = query.filter(**{criteria: self.request.get('colValue')})
 
         if self.request.get('sort') is None:
             query = query.order_by("-id")

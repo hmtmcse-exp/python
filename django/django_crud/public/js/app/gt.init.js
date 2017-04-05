@@ -25,7 +25,8 @@ jQuery(document).ready(function(){
     });
 
     var searchArea = jQuery("#search-area");
-    searchArea.find(".selected-column-name li").click(function(){
+    searchArea.find(".selected-column-name li").click(function(e){
+        e.preventDefault();
         var _this = $(this);
         searchArea.find(".selected-column-label").text(_this.text());
         searchArea.find(".selected-column-name").val(_this.attr('data'));
@@ -39,7 +40,7 @@ jQuery(document).ready(function(){
             searchArea.find(".selected-column-label").text(colName);
         }
     }
-
+    searchArea.find(".selected-column-name").val(selected.attr("selected-data"));
     jQuery('.datepicker').datepicker({
         dateFormat: 'dd-mm-yy'
     });

@@ -23,7 +23,6 @@
                                         </button>
                                         <ul class="dropdown-menu selected-column-name" role="menu" selected-data="name">
                                             <li data="name"><a href="#">Name</a></li>
-                                            <li data="department"><a href="#">Department</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -47,7 +46,6 @@
                 <thead>
                 <tr>
                     {% sortable_th 'Name' 'name' %}
-                    {% sortable_th 'Department' 'department' %}
                     <th class="action-row">Action</th>
                 </tr>
                 </thead>
@@ -55,7 +53,6 @@
                 {% for department in departments %}
                 <tr >
                     <td>{{ department.name }}</td>
-                    <td>B</td>
                     <td class="action-row">
                         <div class="btn-toolbar">
                             <div class="btn-group  btn-group-justified">

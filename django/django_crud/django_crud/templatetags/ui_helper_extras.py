@@ -99,6 +99,5 @@ def sortable_th(context, display_name, name):
         else:
             current_sort = "-" + name
             icon = '<span class="glyphicon glyphicon-triangle-top"></span>'
-
     html = '<th>' + icon + ' <a href="?sort=' + current_sort + '">' + display_name + '</a></th>'
     return format_html(html)
