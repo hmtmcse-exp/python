@@ -74,8 +74,13 @@ def make_pagination(context, total):
 
 @register.simple_tag(takes_context=True)
 def item_per_page(context):
-    html = '<select class="form-control">'
+    html = '<select class="form-control item-per-page-changed">'
     selected = SYSTEM_CONSTANT.ITEMS_PER_PAGE
+    request = context['request']
+    get_data = request.GET
+    if get_data.get('limit') is not None:
+        selected = int(get_data.get('limit'))
+
     for item in [5, 10, 15, 25, 50, 100, 500]:
         if item == selected:
             html += '<option selected>' + str(item) + '</option>'

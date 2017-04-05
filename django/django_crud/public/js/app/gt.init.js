@@ -24,6 +24,22 @@ jQuery(document).ready(function(){
         }
     });
 
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+
+    jQuery(".item-per-page-changed").change(function () {
+        var url = window.location.href;
+        window.location.href = updateQueryStringParameter(url, "limit", $(this).val())
+    });
+
     var searchArea = jQuery("#search-area");
     searchArea.find(".selected-column-name li").click(function(e){
         e.preventDefault();
