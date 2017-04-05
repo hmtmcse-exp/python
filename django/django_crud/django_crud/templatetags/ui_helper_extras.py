@@ -12,8 +12,35 @@ def concat_static_url(url):
     return "/static/" + url
 
 
-def generate_pagination():
-    return '<ul class="pagination"><li><a href="#">1</a></li><li class="active"><a href="#">2</a></li></ul>'
+def number_between(n, start, end):
+    if start <= n <= end:
+        return True
+    else:
+        return False
+
+
+def generate_pagination(total):
+    loop = int(total / SYSTEM_CONSTANT.ITEMS_PER_PAGE)
+    modulus = total % SYSTEM_CONSTANT.ITEMS_PER_PAGE
+    html = '<ul class="pagination">'
+    offset = 0
+    limit = SYSTEM_CONSTANT.ITEMS_PER_PAGE
+    n = 0
+    for n in range(1, loop + 1):
+        if number_between(n, offset, limit):
+            html += '<li class="active"><a href="#">' + str(n) + '</a></li>'
+        else:
+            html += '<li><a href="?offset=' + str(offset) + '&limit=' + str(limit) + '">' + str(n) + '</a></li>'
+        offset = offset + limit
+
+    if modulus != 0:
+        n += 1
+        if number_between(n, offset, limit):
+            html += '<li class="active"><a href="#">' + str(n) + '</a></li>'
+        else:
+            html += '<li><a href="?offset=' + str(offset) + '&limit=' + str(limit) + '">' + str(n) + '</a></li>'
+    return html
+
 
 @register.simple_tag
 def load_css(file_name):
@@ -36,7 +63,7 @@ def image_url(file_name):
 @register.simple_tag(takes_context=True)
 def make_pagination(context, toatal):
     request = context['request']
-    return format_html(generate_pagination())
+    return format_html(generate_pagination(toatal))
 
 
 @register.simple_tag(takes_context=True)
