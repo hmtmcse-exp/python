@@ -35,7 +35,15 @@ def edit(request, pk):
 
 
 def update(request):
-    return render(request, 'university/home.html')
+    data = CRUDHelper(Department, request.POST)
+    if data.is_valid():
+        data.save()
+        messages.success(request, "Successfully Updated.")
+        return redirect('department_index')
+    else:
+        messages.error(request, data.get_error_message())
+        TmpMemory.set_redirect_tmp(request.POST)
+        return redirect('department_edit')
 
 
 def delete(request):

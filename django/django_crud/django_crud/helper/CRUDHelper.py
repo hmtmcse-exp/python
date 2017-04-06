@@ -5,8 +5,18 @@ class CRUDHelper:
 
     def __init__(self, model, data=None):
         self.model = model
-        self.modelObject = model()
         self.request = data
+        pk = None
+        if self.request is not None:
+            if self.request.get("id") is not None:
+                pk = self.request.get("id")
+            elif self.request.get("pk") is not None:
+                pk = self.request.get("pk")
+        if pk is None:
+            self.modelObject = model()
+        else:
+            self.modelObject = self.get_by_id(pk)
+
         self.error_message = "Unknown Error."
         self.total = 0
 
