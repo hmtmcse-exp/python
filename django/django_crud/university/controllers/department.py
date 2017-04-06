@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django_crud.helper.CRUDHelper import CRUDHelper
 from django_crud.helper.TmpMemory import TmpMemory
 from university.models import Department
+from university.services import URL_CONSTANT
 
 
 def index(request):
@@ -29,8 +30,10 @@ def save(request):
 
 
 def edit(request, pk):
-    crud_helper = CRUDHelper(Department)
-    data = crud_helper.get_by_id(pk)
+    data = TmpMemory.get_redirect_tmp()
+    if data is None:
+        crud_helper = CRUDHelper(Department)
+        data = crud_helper.get_by_id(pk)
     return render(request, 'university/department/edit.html', {"data": data})
 
 
@@ -43,7 +46,7 @@ def update(request):
     else:
         messages.error(request, data.get_error_message())
         TmpMemory.set_redirect_tmp(request.POST)
-        return redirect('department_edit')
+        return redirect("/" + URL_CONSTANT.DEPARTMENT_EDIT + "0")
 
 
 def delete(request):

@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^' + URL_CONSTANT.COURSE_DELETE, course.delete, name='course_delete'),
     url(r'^' + URL_CONSTANT.COURSE_INDEX, course.index, name='course_index'),
 
-    url(r'^' + URL_CONSTANT.DEPARTMENT_EDIT + "?$", department.edit, name='department_edit'),
+    url(r'^' + URL_CONSTANT.DEPARTMENT_EDIT + "(?P<pk>\d+)/?$", department.edit, name='department_edit'),
     url(r'^' + URL_CONSTANT.DEPARTMENT_CREATE + "?$", department.create, name='department_create'),
     url(r'^' + URL_CONSTANT.DEPARTMENT_SAVE + "?$", department.save, name='department_save'),
     url(r'^' + URL_CONSTANT.DEPARTMENT_UPDATE, department.update, name='department_update'),
