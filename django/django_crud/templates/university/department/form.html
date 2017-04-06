@@ -8,6 +8,6 @@
 
 <div class="form-group">
     <label> Description </label>
-  <textarea class="form-control" name="description">{{ data.description }}</textarea>
+  <textarea class="form-control" name="description">{{ data.description|default_if_none:'' }}</textarea>
 </div>
 {% csrf_token %}

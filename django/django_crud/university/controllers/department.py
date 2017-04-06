@@ -28,6 +28,12 @@ def save(request):
         return redirect('department_create')
 
 
+def edit(request, pk):
+    crud_helper = CRUDHelper(Department)
+    data = crud_helper.get_by_id(pk)
+    return render(request, 'university/department/edit.html', {"data": data})
+
+
 def update(request):
     return render(request, 'university/home.html')
 

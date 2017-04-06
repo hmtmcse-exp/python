@@ -3,7 +3,7 @@ from django_crud.helper import SYSTEM_CONSTANT
 
 class CRUDHelper:
 
-    def __init__(self, model, data):
+    def __init__(self, model, data=None):
         self.model = model
         self.modelObject = model()
         self.request = data
@@ -35,10 +35,14 @@ class CRUDHelper:
     def get_model(self):
         return self.modelObject
 
+    def get_by(self, dictionary):
+        return self.model.objects.filter(**dictionary).get()
+
+    def get_by_id(self, pk):
+        return self.get_by({"id__exact": pk})
+
     def get_list(self):
-        query = self.model.objects.filter(
-            enable=True
-        )
+        query = self.model.objects
         self.total = query.count()
         col_name = self.request.get('colName')
         if col_name is not None and self.request.get('colValue') is not None:
