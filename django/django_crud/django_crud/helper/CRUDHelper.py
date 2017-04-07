@@ -53,6 +53,9 @@ class CRUDHelper:
 
     def delete_by_id(self, pk):
         data = self.get_by({"id__exact": pk})
+        if data is None:
+            self.error_message = "Invalid Record"
+            return False
         data.delete()
         return True
 
