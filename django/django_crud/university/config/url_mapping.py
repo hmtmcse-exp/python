@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^' + URL_CONSTANT.DEPARTMENT_SAVE + "?$", department.save, name='department_save'),
     url(r'^' + URL_CONSTANT.DEPARTMENT_UPDATE + "?$", department.update, name='department_update'),
     url(r'^' + URL_CONSTANT.DEPARTMENT_DELETE + "(?P<pk>\d+)/?$", department.delete, name='department_delete'),
+    url(r'^' + URL_CONSTANT.DEPARTMENT_DETAILS + "(?P<pk>\d+)/?$", department.details, name='department_details'),
     url(r'^' + URL_CONSTANT.DEPARTMENT_INDEX + "?$", department.index, name='department_index'),
 
     url(r'^' + URL_CONSTANT.HOME_INDEX, home.home, name='home'),

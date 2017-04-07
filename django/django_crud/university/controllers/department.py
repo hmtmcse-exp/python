@@ -37,6 +37,15 @@ def edit(request, pk):
     return render(request, 'university/department/edit.html', {"data": data})
 
 
+def details(request, pk):
+    crud_helper = CRUDHelper(Department)
+    data = crud_helper.get_by_id(pk)
+    if data is None:
+        messages.error(request, "Invalid Recored.")
+        return redirect('department_index')
+    return render(request, 'university/department/details.html', {"data": data})
+
+
 def update(request):
     data = CRUDHelper(Department, request.POST)
     if data.is_valid():
