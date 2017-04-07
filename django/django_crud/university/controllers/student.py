@@ -55,7 +55,7 @@ def update(request):
     else:
         messages.error(request, data.get_error_message())
         TmpMemory.set_redirect_tmp(request.POST)
-        return redirect("/" + URL_CONSTANT.DEPARTMENT_EDIT + "0")
+        return redirect("/" + URL_CONSTANT.COURSE_EDIT + "0")
 
 
 def delete(request, pk):
