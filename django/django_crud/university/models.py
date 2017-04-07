@@ -43,7 +43,7 @@ class Course(models.Model):
 
 class Student(models.Model):
     first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200, null=True)
     created = models.DateTimeField(auto_now=True)
     enable = models.BooleanField(default=True)
     app_uuid = models.UUIDField(default=uuid.uuid4)

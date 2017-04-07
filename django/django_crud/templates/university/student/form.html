@@ -1,13 +1,16 @@
 <div class="form-group">
     <label for="name">
-        Name
+        First Name
         <span class="required-indicator">*</span>
     </label>
-    <input type="text" class="form-control" name="name" required="" value="{{ data.name }}"/>
+    <input type="text" class="form-control" name="first_name" required="" value="{{ data.first_name }}"/>
 </div>
 
 <div class="form-group">
-    <label> Description </label>
-  <textarea class="form-control" name="description">{{ data.description|default_if_none:'' }}</textarea>
+    <label for="name">
+        Last Name
+    </label>
+    <input type="text" class="form-control" name="last_name" value="{{ data.last_name }}"/>
 </div>
+
 {% csrf_token %}
