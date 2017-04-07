@@ -49,6 +49,14 @@ def update(request):
         return redirect("/" + URL_CONSTANT.DEPARTMENT_EDIT + "0")
 
 
-def delete(request):
-    return render(request, 'university/home.html')
+def delete(request, pk):
+    crud_helper = CRUDHelper(Department)
+    is_deleted = crud_helper.delete_by_id(pk)
+    if is_deleted:
+        messages.success(request, "Successfully Deleted.")
+        return redirect('department_index')
+    else:
+        messages.error(request, crud_helper.get_error_message())
+        return redirect('department_index')
+
 

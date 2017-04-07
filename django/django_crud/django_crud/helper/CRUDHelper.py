@@ -51,6 +51,11 @@ class CRUDHelper:
     def get_by_id(self, pk):
         return self.get_by({"id__exact": pk})
 
+    def delete_by_id(self, pk):
+        data = self.get_by({"id__exact": pk})
+        data.delete()
+        return True
+
     def get_list(self):
         query = self.model.objects
         self.total = query.count()
