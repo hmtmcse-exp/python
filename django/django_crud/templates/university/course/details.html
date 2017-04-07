@@ -1,0 +1,18 @@
+{% extends 'layouts/app.html' %}
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Course Details</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <tr><th class="text-right">Name</th><td>{{ data.name|default_if_none:'' }}/td></tr>
+                <tr><th class="text-right">Description</th><td>{{ data.description|default_if_none:'' }}</td></tr>
+            </table>
+
+            <div class="form-action pull-right">
+                <a href="/course/" class="btn  btn-danger">Back</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

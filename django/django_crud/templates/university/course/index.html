@@ -1,0 +1,81 @@
+{% extends 'layouts/app.html' %}
+{% block content %}
+{% load ui_helper_extras %}
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Course List
+        </div>
+        <div class="panel-body">
+            <div class="navbar-form navbar-right">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group" role="group" aria-label="Third group">
+                        <form action="#" method="GET">
+                            <div class="input-group" id="search-area">
+                                <div class="input-group-btn">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default selected-column-label">Select
+                                        </button>
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu selected-column-name" role="menu" selected-data="name">
+                                            <li data="name"><a href="#">Name</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <input type="text" name="colValue" class="form-control" value=""/>
+                                <input type="hidden" name="colName" class="selected-column-name" value=""/>
+                                <span class="input-group-btn">
+									<button class="btn btn-default" type="submit">Search</button>
+								</span>
+                            </div>
+                        </form>
+
+
+                    </div>
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <a href="/course/create" class="btn  btn-success">Add New</a>
+                        <a href="/course" class="btn  btn-info">Reload</a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    {% sortable_th 'Name' 'name' %}
+                    <th class="action-row">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for course in courses %}
+                <tr >
+                    <td>{{ course.name }}</td>
+                    <td class="action-row">
+                        <div class="btn-toolbar">
+                            <div class="btn-group  btn-group-justified">
+                                <a href="/course/details/{{ course.id }}" class="btn  btn-default"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="/course/edit/{{ course.id }}" class="btn  btn-default"><i class="glyphicon glyphicon-pencil"></i></a>
+                                <a href="#" class="btn btn-default open-confirm-box" wizard-url="course/delete/{{ course.id }}" wizard-title="Delete"><i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="paginate-panel">
+                <div class="pull-left">
+                    {% item_per_page %}
+                </div>
+                <div class="pull-right">
+                    {% make_pagination total_count %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
