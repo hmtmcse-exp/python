@@ -1,6 +1,10 @@
 
 
 if __name__ == '__main__':
+
+    print("touhid_mia".title())
+
+
     x = dict()
     x["Name"] = "Touhid"
     print(x["Name"])
@@ -13,3 +17,4 @@ if __name__ == '__main__':
 
 for n in range(1, 10):
     print(n)
+

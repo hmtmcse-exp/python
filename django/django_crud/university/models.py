@@ -59,6 +59,11 @@ class Student(models.Model):
             },
             'last_name': {},
             'enable': {},
+            'department': {
+                'required': True,
+                'belongsTo': True,
+                'message': 'Please Select Department.'
+            },
         }
 
 
