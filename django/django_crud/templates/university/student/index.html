@@ -46,13 +46,15 @@
                 <thead>
                 <tr>
                     {% sortable_th 'Name' 'name' %}
+                    <th>Department</th>
                     <th class="action-row">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for student in students %}
                 <tr >
-                    <td>{{ student.name }}</td>
+                    <td>{{ student.first_name }} {{ student.last_name }}</td>
+                    <td>{{ student.department.name }}</td>
                     <td class="action-row">
                         <div class="btn-toolbar">
                             <div class="btn-group  btn-group-justified">

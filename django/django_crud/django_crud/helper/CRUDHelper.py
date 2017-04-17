@@ -1,4 +1,5 @@
 from django_crud.helper import SYSTEM_CONSTANT
+from university.models import *
 
 
 class CRUDHelper:
