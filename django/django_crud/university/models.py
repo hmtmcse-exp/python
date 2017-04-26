@@ -62,6 +62,7 @@ class Student(models.Model):
             'department': {
                 'required': True,
                 'belongsTo': True,
+                'modelName': "Department",
                 'message': 'Please Select Department.'
             },
         }

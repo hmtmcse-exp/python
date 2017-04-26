@@ -34,16 +34,15 @@ class CRUDHelper:
                             self.error_message = key + " Required Field"
                         return False
             if form_field is not None and form_field != "":
-                if "belongsTo" in value and value["belongsTo"]:
-                    self.resolve_belongs_to(key, form_field)
+                if "belongsTo" in value and value["belongsTo"] and "modelName" in value:
+                    self.resolve_belongs_to(key, form_field, value["modelName"])
                 else:
                     setattr(self.modelObject, key, form_field)
         return True
 
-    def resolve_belongs_to(self, key, form_field):
-        model_name = key.title()
+    def resolve_belongs_to(self, key, form_field_value, model_name):
         pv_crud_helper = CRUDHelper(eval(model_name))
-        belongs_to_data = pv_crud_helper.get_by_id(form_field)
+        belongs_to_data = pv_crud_helper.get_by_id(form_field_value)
         setattr(self.modelObject, key, belongs_to_data)
 
     def save(self):
